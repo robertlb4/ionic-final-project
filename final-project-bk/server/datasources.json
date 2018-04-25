@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongo": {
+    "host": "mlab.com",
+    "port": 57599,
+    "url": "mongodb://dev:dev@ds157599.mlab.com:57599/what-is-around-app",
+    "database": "what-is-around-app",
+    "password": "dev",
+    "name": "mongo",
+    "user": "dev",
+    "connector": "mongodb"
+  }
+}
