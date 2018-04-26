@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 //import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
-//import { User } from '../../providers/providers';
-//import { MainPage } from '../pages';
+import { User } from '../../providers/user/user';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -11,20 +11,17 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
   templateUrl: 'signup.html'
 })
 export class SignupPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
+ 
   account: { name: string, email: string, password: string } = {
     name: '',
     email: '',
     password: ''
   };
 
-  // Our translated text strings
-  //private signupErrorString: string;
+
 
   constructor(public navCtrl: NavController,
-    //public user: User,
+    public user: User,
     public toastCtrl: ToastController,
     //public translateService: TranslateService
   ) {
@@ -34,21 +31,23 @@ export class SignupPage {
     // })
   }
 
-  // doSignup() {
-  //   // Attempt to login in through our User service
-  //   this.user.signup(this.account).subscribe((resp) => {
-  //     this.navCtrl.push(MainPage);
-  //   }, (err) => {
+  doSignup() {
+    this.user.signup(this.account).subscribe((resp) => {
+      this.navCtrl.push(HomePage);
+    }, (err) => {
+      console.log(err);
+      //this.navCtrl.push(HomePage);
 
-  //     this.navCtrl.push(MainPage);
-
-  //     // Unable to sign up
-  //     let toast = this.toastCtrl.create({
-  //       message: this.signupErrorString,
-  //       duration: 3000,
-  //       position: 'top'
-  //     });
-  //     toast.present();
-  //   });
-  // }
+      // Unable to sign up
+      let toast = this.toastCtrl.create({
+        message: err.error.error.message,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+      for(let p in this.account) {
+        this.account[p] = '';
+      };
+    });
+  }
 }
