@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers/user/user';
-import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
+import { SignupPage } from '../signup/signup';
 
 @IonicPage()
 @Component({
@@ -30,7 +31,7 @@ export class LoginPage {
 
   doLogin() {
     this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(HomePage);
+      this.navCtrl.setRoot(TabsPage);
     }
     , (err) => {
       //this.navCtrl.push(HomePage);
@@ -45,4 +46,8 @@ export class LoginPage {
       this.account.password="";
     }
   )}
+
+  goToSignup() {
+    this.navCtrl.push(SignupPage);
+  }
 }
