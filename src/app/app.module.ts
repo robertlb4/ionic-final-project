@@ -7,33 +7,41 @@ import  { Geolocation } from '@ionic-native/geolocation';
 import { HttpClientModule } from '@angular/common/http';
  
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
+import { HomePageModule } from '../pages/home/home.module';
+import { LoginPageModule } from '../pages/login/login.module';
+import { TabsPageModule } from '../pages/tabs/tabs.module';
+import { SignupPageModule } from '../pages/signup/signup.module';
+
 import { User } from '../providers/user/user';
+
+import { MapProvider } from '../providers/map/map';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    LoginPage
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    HomePageModule,
+    LoginPageModule,
+    TabsPageModule,
+    SignupPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    LoginPage
+    
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    User
+    User,
+    MapProvider
   ]
 })
 export class AppModule {}

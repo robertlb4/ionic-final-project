@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class User {
-  [x: string]: any;
   BASE_URL: string = 'http://localhost:3000/api/appUsers';
   _user: any;
 
@@ -17,8 +16,10 @@ export class User {
 
 
     seq.subscribe((res: any) => {
-      if (res.status == 'success') {
+      if (res.id) {
         this._loggedIn(res);
+        sessionStorage.setItem('token', res.token);
+        sessionStorage.setItem('userId', res.userId);
       } else {
       }
     }, err => {
@@ -32,8 +33,10 @@ export class User {
     let seq = this.http.post(this.BASE_URL, accountInfo)
 
     seq.subscribe((res: any) => {
-      if (res.status == 'success') {
+      if (res.id) {
         this._loggedIn(res);
+        sessionStorage.setItem('token', res.token);
+        sessionStorage.setItem('userId', res.userId);
       }
     }, err => {
       console.error('ERROR', err);
@@ -52,6 +55,6 @@ export class User {
    * Process a login/signup response to store user data
    */
   _loggedIn(resp) {
-    this._user = resp.user;
+    this._user = resp;
   }
 }
