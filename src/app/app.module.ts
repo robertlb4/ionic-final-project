@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import  { Geolocation } from '@ionic-native/geolocation';
 import { HttpClientModule } from '@angular/common/http';
  
+
 import { MyApp } from './app.component';
 import { HomePageModule } from '../pages/home/home.module';
 import { LoginPageModule } from '../pages/login/login.module';
@@ -14,7 +15,9 @@ import { SignupPageModule } from '../pages/signup/signup.module';
 
 import { User } from '../providers/user/user';
 
+
 import { MapProvider } from '../providers/map/map';
+
 
 @NgModule({
   declarations: [
