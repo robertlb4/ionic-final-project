@@ -33,9 +33,7 @@ export class HomePage {
      this._map.markers = [];
         return new Promise((resolve, reject)=> { this._user.getPreferences()
           .subscribe((res: any)=> {
-          //console.log(res.searchPreference);
           this._map.placeSearch = res.searchPreference ? res.searchPreference : [];
-          console.log(this._map.placeSearch, 'home')
           resolve();
           })    
         })
@@ -47,7 +45,6 @@ export class HomePage {
      })
       .then((res: any[]) => {
         res.forEach(marker => {
-          //console.log(marker);
           this._map.createMarker(marker)
         })
       });

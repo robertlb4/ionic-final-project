@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers/user/user';
-import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -32,15 +32,17 @@ export class SignupPage {
   }
 
   doSignup() {
-    this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(HomePage);
-      let initialPref = [];
-    this.user.initPreferences(initialPref)
+    this.user.signup(this.account).subscribe((resp: any) => {
+      sessionStorage.setItem('token', resp.token);
+      sessionStorage.setItem('userId', resp.userId);
+      this.user.initPreferences()
+        .subscribe(() => {
+          this.navCtrl.setRoot(TabsPage);
+        })
+      
     }, (err) => {
       console.log(err);
-      //this.navCtrl.push(HomePage);
-
-      // Unable to sign up
+      
       let toast = this.toastCtrl.create({
         message: err.error.error.message,
         duration: 3000,

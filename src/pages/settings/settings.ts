@@ -34,12 +34,17 @@ export class SettingsPage {
     
   }
   updatePlaceSearch(i) {
-    if (!this._map.placeSearch.some(x => x === this.locationTypes[i])) {
-      this._map.placeSearch.push(this.locationTypes[i])
+    this._map.placeSearch.splice(0,1, this.locationTypes[i]);
+    if(this._map.placeSearch.length > 1) {
+      this._map.placeSearch = [this._map.placeSearch[0]];
     }
-    else {
-      this._map.placeSearch = this._map.placeSearch.filter(x => x !== this.locationTypes[i]);
-    }
+
+    // if (!this._map.placeSearch.some(x => x === this.locationTypes[i])) {
+    //   this._map.placeSearch.push(this.locationTypes[i])
+    // }
+    // else {
+    //   this._map.placeSearch = this._map.placeSearch.filter(x => x !== this.locationTypes[i]);
+    // }
   }
 
   updateMap() {

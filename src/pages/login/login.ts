@@ -34,7 +34,6 @@ export class LoginPage {
       sessionStorage.setItem('token', resp.token);
       sessionStorage.setItem('userId', resp.userId);
       this.navCtrl.setRoot(TabsPage);
-      console.log('what?')
     }
     , (err) => {
       let toast = this.toastCtrl.create({

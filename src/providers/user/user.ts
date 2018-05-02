@@ -14,7 +14,6 @@ export class User {
 
   login(accountInfo: any) {
     let seq = this.http.post(`${this.BASE_URL}/login`, accountInfo)
-    let seq2;
 
     seq.subscribe((res: any) => {
       if (res.id) {
@@ -31,16 +30,15 @@ export class User {
     let seq = this.http.post(this.BASE_URL, accountInfo)
 
     seq.subscribe((res: any) => {
+     
       if (res.id) {
         this._loggedIn(res);
-        sessionStorage.setItem('token', res.token);
-        sessionStorage.setItem('userId', res.userId);
-        console.log('set');
       }
-      
+      console.log(res.token);
     }, err => {
       console.error('ERROR', err);
-    });
+    })
+    
     return seq;
   }
 
@@ -70,10 +68,10 @@ export class User {
 
   }
 
-  initPreferences(prefArray: string[]) {
+  initPreferences() {
     let id = sessionStorage.getItem('userId')
     let token = sessionStorage.getItem('token')
-    let seq = this.http.post(`${this.BASE_URL}/${id}/searchPreference?access_token=${token}`, {searchPreference: prefArray})
+    let seq = this.http.post(`${this.BASE_URL}/${id}/searchPreference?access_token=${token}`, {searchPreference: ['restaurant']})
     
     seq.subscribe(res => {
       console.log(res);

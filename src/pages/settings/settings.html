@@ -15,14 +15,12 @@
 
 </ion-header>
 
-
 <ion-content padding>
-    <ul class="list">
-        <li *ngFor="let location of locationTypes, let i = index" class="list-item"> 
-          <input (change)="updatePlaceSearch(i)" type="checkbox"
-                   name="locations"
-                   value="{{location}}"/> 
-          <span class="game-text">{{location}}</span>
-        </li>
-    </ul>
+
+
+        <ion-item *ngFor="let location of locationTypes, let i = index" class="list-item"> 
+          <ion-label>{{location}}</ion-label>
+          <ion-checkbox (ionChange)="updatePlaceSearch(i)"></ion-checkbox>
+        </ion-item>
+ 
 </ion-content>
