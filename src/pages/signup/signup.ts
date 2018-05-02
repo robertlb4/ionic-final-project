@@ -34,6 +34,8 @@ export class SignupPage {
   doSignup() {
     this.user.signup(this.account).subscribe((resp) => {
       this.navCtrl.push(HomePage);
+      let initialPref = [];
+    this.user.initPreferences(initialPref)
     }, (err) => {
       console.log(err);
       //this.navCtrl.push(HomePage);

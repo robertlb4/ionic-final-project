@@ -30,12 +30,13 @@ export class LoginPage {
   }
 
   doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
+    this.user.login(this.account).subscribe((resp: any) => {
+      sessionStorage.setItem('token', resp.token);
+      sessionStorage.setItem('userId', resp.userId);
       this.navCtrl.setRoot(TabsPage);
+      console.log('what?')
     }
     , (err) => {
-      //this.navCtrl.push(HomePage);
-     // Unable to log in
       let toast = this.toastCtrl.create({
         message: 'Invalid username or password',
         duration: 3000,

@@ -8,11 +8,21 @@
 
   <ion-navbar>
     <ion-title>settings</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)=updateMap();>Save</button>
+      </ion-buttons> 
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <ul class="list">
+        <li *ngFor="let location of locationTypes, let i = index" class="list-item"> 
+          <input (change)="updatePlaceSearch(i)" type="checkbox"
+                   name="locations"
+                   value="{{location}}"/> 
+          <span class="game-text">{{location}}</span>
+        </li>
+    </ul>
 </ion-content>

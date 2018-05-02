@@ -16,8 +16,9 @@ let options = {
 export class MapProvider {
   lat;
   lng;
-  placeResults: any[];
-
+  //placeResults: any[];
+  placeSearch: any[] = [];
+  markers: any[] = [];
   constructor(public http: HttpClient, public geolocation: Geolocation) {
   }
 
@@ -41,14 +42,15 @@ export class MapProvider {
 
   getPlaces() {
     return new Promise((resolve, reject) => {infowindow = new google.maps.InfoWindow();
+      console.log(this.placeSearch)
       let service = new google.maps.places.PlacesService(map);
       service.nearbySearch({
         location: {lat: this.lat, lng: this.lng},
         radius: 1000,
-        type: ['restaurant', ]
+        type: this.placeSearch.length > 0 ? this.placeSearch: ['restaurant' ]
       }, (results,status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          this.placeResults = results;
+          //this.placeResults = results;
           resolve(results);
         } else reject(new Error('errorMsg'))
       });
@@ -61,6 +63,7 @@ export class MapProvider {
       map: map,
       position: placeLoc
     });
+    this.markers.push(marker);
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(place.name);
       infowindow.open(map, this);

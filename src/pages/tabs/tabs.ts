@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
 import { User } from '../../providers/user/user';
@@ -24,12 +24,15 @@ export class TabsPage {
   settingsRoot = 'SettingsPage'
 
 
-  constructor(public navCtrl: NavController, public _user: User) {}
+  constructor(public navCtrl: NavController, public _user: User) {
   
-  ionViewDidLoad() {
+  }
+
+  ionViewWillEnter() {
     let token = sessionStorage.getItem('token');
     if (!token) this.navCtrl.setRoot(LoginPage);
   }
+  
 }
 
 

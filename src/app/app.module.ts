@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -12,6 +13,7 @@ import { HomePageModule } from '../pages/home/home.module';
 import { LoginPageModule } from '../pages/login/login.module';
 import { TabsPageModule } from '../pages/tabs/tabs.module';
 import { SignupPageModule } from '../pages/signup/signup.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 import { User } from '../providers/user/user';
 
@@ -26,11 +28,13 @@ import { MapProvider } from '../providers/map/map';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     HomePageModule,
     LoginPageModule,
     TabsPageModule,
     SignupPageModule,
+    PipesModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
