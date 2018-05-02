@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MapProvider } from '../../providers/map/map';
 
 /**
  * Generated class for the ListPage page.
@@ -15,11 +16,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _map: MapProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListPage');
+    
   }
 
 }

@@ -48,10 +48,8 @@ export class MapProvider {
         type: ['restaurant', ]
       }, (results,status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
+          this.placeResults = results;
           resolve(results);
-          // for (let i = 0; i < results.length; i++) {
-          //   this.createMarker(results[i]);
-         // }
         } else reject(new Error('errorMsg'))
       });
     })   

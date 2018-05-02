@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class User {
-  BASE_URL: string = 'http://localhost:3000/api/appUsers';
+  BASE_URL: string = 'http://robert-spring-2018-phortonssf.c9users.io:8080/api/appUsers';
   _user: any;
 
   constructor(public http: HttpClient) { }
