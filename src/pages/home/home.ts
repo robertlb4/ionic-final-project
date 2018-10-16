@@ -36,6 +36,6 @@ export class HomePage {
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
   }
 }
