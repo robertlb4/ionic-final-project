@@ -1,32 +1,54 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import  { Geolocation } from '@ionic-native/geolocation';
+import { HttpClientModule } from '@angular/common/http';
  
+
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { HomePageModule } from '../pages/home/home.module';
+import { LoginPageModule } from '../pages/login/login.module';
+import { TabsPageModule } from '../pages/tabs/tabs.module';
+import { SignupPageModule } from '../pages/signup/signup.module';
+import { PipesModule } from '../pipes/pipes.module';
+
+import { User } from '../providers/user/user';
+
+
+import { MapProvider } from '../providers/map/map';
+
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    HomePageModule,
+    LoginPageModule,
+    TabsPageModule,
+    SignupPageModule,
+    PipesModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    User,
+    MapProvider
   ]
 })
 export class AppModule {}

@@ -1,8 +1,16 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform} from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { MapProvider } from '../../providers/map/map';
+import { User } from '../../providers/user/user';
  
-declare var google;
+declare let google;
+let map: any;
+let infowindow: any;
+let options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+};
  
 @Component({
   selector: 'home-page',
@@ -11,31 +19,38 @@ declare var google;
 export class HomePage {
  
   @ViewChild('map') mapElement: ElementRef;
-  map: any;
- 
-  constructor(public navCtrl: NavController, public geolocation: Geolocation) {
+
+  constructor(public platform: Platform, public navCtrl: NavController, public geolocation: Geolocation, public _map: MapProvider, public _user: User) {
  
   }
  
-  ionViewDidLoad(){
-    this.loadMap();
-  }
- 
-  loadMap(){
- 
-    this.geolocation.getCurrentPosition().then(position => {
+  ionViewDidLoad() {
       
-      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
- 
-      let mapOptions = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-   
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    
+    this.platform.ready().then(() => {
+      this._map.markers.forEach(marker => { 
+        marker.setMap(null);
+      })
+     this._map.markers = [];
+        return new Promise((resolve, reject)=> { this._user.getPreferences()
+          .subscribe((res: any)=> {
+          this._map.placeSearch = res.searchPreference ? res.searchPreference : [];
+          resolve();
+          })    
+        })
+      .then((res: any)=> {
+        return this._map.initMap(this.mapElement)
+      })
+      .then((res) => {
+       return this._map.getPlaces()
+     })
+      .then((res: any[]) => {
+        res.forEach(marker => {
+          this._map.createMarker(marker)
+        })
+      });
     })
-    .catch(err => console.log(err));
+     
   }
+
+  
 }
